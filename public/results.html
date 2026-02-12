@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tus Resultados - Diagnóstico de Liderazgo</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tus Resultados de Liderazgo</h1>
+            <p class="subtitle">Análisis completo de tu efectividad como líder</p>
+        </header>
+
+        <section id="results-loading">
+            <div class="loader">Generando tu reporte personalizado...</div>
+        </section>
+
+        <section id="results-content" style="display: none;">
+            <!-- Aquí se inyecta dinámicamente el reporte desde JS -->
+        </section>
+
+        <footer>
+            <p>¿Quieres profundizar en tu desarrollo de liderazgo?</p>
+            <a href="#contacto" class="cta-button">Agenda una sesión estratégica gratuita</a>
+        </footer>
+    </div>
+
+    <script src="js/assessment.js"></script>
+    <script>
+        // Cargar resultados desde localStorage o URL params
+        window.addEventListener('DOMContentLoaded', () => {
+            displayResults();
+        });
+    </script>
+</body>
+</html>
