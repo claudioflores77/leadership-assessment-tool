@@ -1,0 +1,257 @@
+{
+  "version": "1.0.0",
+  "language": "es",
+  "title": "Diagnóstico de Efectividad en Liderazgo",
+  "description": "Self-assessment para mandos medios y altos",
+  "estimated_time_minutes": 10,
+  "sections": [
+    {
+      "section_id": "profile",
+      "section_name": "Perfil Demográfico",
+      "questions": [
+        {
+          "id": "P1",
+          "question": "¿Cuál es tu nombre?",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "P2",
+          "question": "¿Cuál es tu email?",
+          "type": "email",
+          "required": true
+        },
+        {
+          "id": "P3",
+          "question": "¿En qué país trabajas actualmente?",
+          "type": "dropdown",
+          "required": true,
+          "options": [
+            "Argentina",
+            "Bolivia",
+            "Chile",
+            "Colombia",
+            "Costa Rica",
+            "Cuba",
+            "Ecuador",
+            "El Salvador",
+            "España",
+            "Estados Unidos",
+            "Guatemala",
+            "Honduras",
+            "México",
+            "Nicaragua",
+            "Panamá",
+            "Paraguay",
+            "Perú",
+            "Puerto Rico",
+            "República Dominicana",
+            "Uruguay",
+            "Venezuela",
+            "Otro"
+          ]
+        },
+        {
+          "id": "P4",
+          "question": "¿Cuál es tu nivel de responsabilidad actual?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Gerente / Jefe de Área (gestiono un equipo)",
+            "Director / Gerente Senior (gestiono a otros gerentes)",
+            "C-Level / Alta Dirección (CEO, COO, CFO, etc.)",
+            "Dueño / Fundador de empresa",
+            "Otro"
+          ]
+        },
+        {
+          "id": "P5",
+          "question": "¿Cuántas personas reportan directa o indirectamente a ti?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "1-5 personas",
+            "6-15 personas",
+            "16-50 personas",
+            "51-100 personas",
+            "Más de 100 personas"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "assessment",
+      "section_name": "Evaluación de Competencias",
+      "instructions": "Para cada afirmación, indica con qué frecuencia describes este comportamiento en tu rol actual.",
+      "scale": {
+        "type": "likert",
+        "min": 1,
+        "max": 5,
+        "labels": {
+          "1": "Nunca o casi nunca",
+          "2": "Rara vez",
+          "3": "A veces",
+          "4": "Frecuentemente",
+          "5": "Siempre o casi siempre"
+        }
+      },
+      "dimensions": [
+        {
+          "dimension_id": "D1",
+          "dimension_name": "Comunicación y Alineamiento Estratégico",
+          "questions": [
+            {
+              "id": "D1Q1",
+              "question": "Explico claramente el 'por qué' detrás de las decisiones y cambios importantes.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D1Q2",
+              "question": "Me aseguro de que mi equipo entienda cómo su trabajo contribuye a los objetivos estratégicos de la organización.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D1Q3",
+              "question": "Comunico expectativas de desempeño de manera específica y medible.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D1Q4",
+              "question": "Comparto información relevante con mi equipo de manera oportuna, incluso cuando las noticias no son positivas.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D1Q5",
+              "question": "Adapto mi estilo de comunicación según la audiencia (equipo, pares, superiores).",
+              "scale": "1-5"
+            }
+          ]
+        },
+        {
+          "dimension_id": "D2",
+          "dimension_name": "Desarrollo de Talento y Coaching",
+          "questions": [
+            {
+              "id": "D2Q1",
+              "question": "Dedico tiempo regular (semanal o quincenal) a conversaciones 1-a-1 con los miembros de mi equipo.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D2Q2",
+              "question": "Identifico activamente oportunidades de crecimiento y desarrollo para cada persona de mi equipo.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D2Q3",
+              "question": "Delego tareas desafiantes que permiten a mi equipo desarrollar nuevas habilidades.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D2Q4",
+              "question": "Hago preguntas que ayudan a mi equipo a encontrar soluciones en lugar de simplemente dar respuestas.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D2Q5",
+              "question": "Celebro los logros y el progreso de las personas de mi equipo de manera específica y auténtica.",
+              "scale": "1-5"
+            }
+          ]
+        },
+        {
+          "dimension_id": "D3",
+          "dimension_name": "Gestión de Conflictos y Feedback",
+          "questions": [
+            {
+              "id": "D3Q1",
+              "question": "Abordo los conflictos y desacuerdos de manera directa en lugar de evitarlos.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D3Q2",
+              "question": "Doy feedback correctivo de manera específica, oportuna y constructiva.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D3Q3",
+              "question": "Mantengo la calma y la objetividad en situaciones de alta tensión o presión.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D3Q4",
+              "question": "Escucho diferentes puntos de vista antes de tomar decisiones que afectan al equipo.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D3Q5",
+              "question": "Admito mis errores y los uso como oportunidades de aprendizaje para el equipo.",
+              "scale": "1-5"
+            }
+          ]
+        },
+        {
+          "dimension_id": "D4",
+          "dimension_name": "Delegación y Empoderamiento",
+          "questions": [
+            {
+              "id": "D4Q1",
+              "question": "Delego decisiones y responsabilidades en lugar de controlar todos los detalles.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D4Q2",
+              "question": "Confío en mi equipo para resolver problemas sin necesidad de mi intervención constante.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D4Q3",
+              "question": "Defiendo a mi equipo y les doy autonomía para experimentar y aprender de los errores.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D4Q4",
+              "question": "Establezco límites claros de autoridad para que mi equipo sepa cuándo puede decidir y cuándo debe consultarme.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D4Q5",
+              "question": "Me enfoco en los resultados que espero en lugar de controlar cómo se logran.",
+              "scale": "1-5"
+            }
+          ]
+        },
+        {
+          "dimension_id": "D5",
+          "dimension_name": "Visión Estratégica y Gestión del Cambio",
+          "questions": [
+            {
+              "id": "D5Q1",
+              "question": "Mantengo una visión clara de hacia dónde debe ir mi área/equipo en los próximos 6-12 meses.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D5Q2",
+              "question": "Anticipo obstáculos y oportunidades que pueden afectar a mi área antes de que se conviertan en crisis.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D5Q3",
+              "question": "Priorizo iniciativas y proyectos según su impacto estratégico, no solo según su urgencia.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D5Q4",
+              "question": "Comunico los cambios organizacionales de manera que mi equipo entienda el contexto y la necesidad.",
+              "scale": "1-5"
+            },
+            {
+              "id": "D5Q5",
+              "question": "Ayudo a mi equipo a adaptarse al cambio gestionando sus preocupaciones y resistencias de manera empática.",
+              "scale": "1-5"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
