@@ -5,34 +5,354 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tus Resultados - Diagnóstico de Liderazgo</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos específicos para la página de resultados */
+        .results-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .results-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .results-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-body {
+            padding: 2rem;
+        }
+
+        .score-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .global-score {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .global-level {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .dimensions-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .dimension-card {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .dimension-card h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .dimension-score {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .level-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .level-Excepcional {
+            background: #10b981;
+            color: white;
+        }
+
+        .level-Efectivo {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .level-En-desarrollo {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .level-Oportunidad-crítica {
+            background: #ef4444;
+            color: white;
+        }
+
+        .strengths-box,
+        .opportunities-box {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .strengths-box {
+            border-left: 4px solid #10b981;
+        }
+
+        .opportunities-box {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .item-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .item-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cta-section {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .actions-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #2563eb;
+            background: white;
+            color: #2563eb;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-action:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .actions-bar,
+            .cta-section {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Tus Resultados de Liderazgo</h1>
-            <p class="subtitle">Análisis completo de tu efectividad como líder</p>
-        </header>
+    <div class="results-container">
+        <div class="results-header">
+            <h1>Tu Diagnóstico de Liderazgo</h1>
+            <p class="subtitle" id="participant-name">Participante</p>
+            <p id="assessment-date"></p>
+        </div>
 
-        <section id="results-loading">
-            <div class="loader">Generando tu reporte personalizado...</div>
-        </section>
+        <div class="results-body">
+            <!-- Barra de acciones -->
+            <div class="actions-bar">
+                <button class="btn-action" onclick="window.print()">📄 Descargar PDF</button>
+                <button class="btn-action" onclick="sendResultsByEmail()">📧 Enviar por Email</button>
+                <a href="index.html" class="btn-action">🔄 Hacer de Nuevo</a>
+            </div>
 
-        <section id="results-content" style="display: none;">
-            <!-- Aquí se inyecta dinámicamente el reporte desde JS -->
-        </section>
+            <!-- Puntaje Global -->
+            <div class="score-card">
+                <h2>Tu Puntaje Global de Liderazgo</h2>
+                <div class="global-score" id="global-score">-</div>
+                <div class="global-level" id="global-level">-</div>
+            </div>
 
-        <footer>
-            <p>¿Quieres profundizar en tu desarrollo de liderazgo?</p>
-            <a href="#contacto" class="cta-button">Agenda una sesión estratégica gratuita</a>
-        </footer>
+            <!-- Resultados por Dimensión -->
+            <h2>Resultados por Dimensión</h2>
+            <div class="dimensions-grid" id="dimensions-grid">
+                <!-- Se llenará dinámicamente -->
+            </div>
+
+            <!-- Top 2 Fortalezas -->
+            <div class="strengths-box">
+                <h2>🌟 Tus Top 2 Fortalezas</h2>
+                <p>Estas son las competencias donde ya estás generando impacto significativo.</p>
+                <ul class="item-list" id="strengths-list">
+                    <!-- Se llenará dinámicamente -->
+                </ul>
+            </div>
+
+            <!-- Top 3 Oportunidades -->
+            <div class="opportunities-box">
+                <h2>🎯 Tus Top 3 Oportunidades de Desarrollo</h2>
+                <p>Estas son las áreas donde invertir en desarrollo tendrá el mayor retorno.</p>
+                <ul class="item-list" id="opportunities-list">
+                    <!-- Se llenará dinámicamente -->
+                </ul>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h2>¿Quieres Profundizar?</h2>
+                <p>Este diagnóstico te da una primera fotografía. Para acelerar tu desarrollo, considera:</p>
+                <ul style="text-align: left; max-width: 600px; margin: 1rem auto;">
+                    <li><strong>Diagnóstico 360°:</strong> Descubre cómo te ven tu jefe, pares y equipo</li>
+                    <li><strong>Sesión Estratégica (30 min, sin costo):</strong> Diseñamos las 3 acciones de mayor impacto</li>
+                </ul>
+                <a href="mailto:contactofba@gmail.com?subject=Diagnóstico de Liderazgo - Próximo Paso" class="cta-button">
+                    Agenda tu Sesión Estratégica
+                </a>
+            </div>
+        </div>
     </div>
 
-    <script src="js/assessment.js"></script>
+    <footer class="site-footer">
+        <p>&copy; 2026 Consultora Estratégica Empresarial | <a href="mailto:contactofba@gmail.com">Contacto</a></p>
+    </footer>
+
     <script>
-        // Cargar resultados desde localStorage o URL params
-        window.addEventListener('DOMContentLoaded', () => {
-            displayResults();
-        });
+        /**
+         * Muestra los resultados cargándolos desde localStorage
+         */
+        function displayResults() {
+            // Obtener datos del localStorage
+            const resultsData = JSON.parse(localStorage.getItem('assessmentResults'));
+            const userData = JSON.parse(localStorage.getItem('assessmentData'));
+
+            // Si no hay datos, redirigir al inicio
+            if (!resultsData || !userData) {
+                alert('No hay resultados disponibles. Por favor completa el assessment primero.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Mostrar información del participante
+            document.getElementById('participant-name').textContent = userData.name || 'Participante';
+            document.getElementById('assessment-date').textContent = 'Fecha: ' + resultsData.date;
+
+            // Mostrar puntaje global
+            document.getElementById('global-score').textContent = resultsData.globalScore.toFixed(1);
+            document.getElementById('global-level').textContent = 'Nivel: ' + resultsData.globalLevel;
+
+            // Mostrar dimensiones
+            const dimensionsGrid = document.getElementById('dimensions-grid');
+            Object.entries(resultsData.dimensionScores).forEach(([dimId, data]) => {
+                const levelClass = 'level-' + data.level.replace(/ /g, '-');
+                dimensionsGrid.innerHTML += `
+                    <div class="dimension-card">
+                        <h3>${data.name}</h3>
+                        <div class="dimension-score">
+                            <span class="score-value">${data.score.toFixed(1)}</span>
+                            <span class="level-badge ${levelClass}">${data.level}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Mostrar fortalezas
+            const strengthsList = document.getElementById('strengths-list');
+            resultsData.topStrengths.forEach(strength => {
+                strengthsList.innerHTML += `
+                    <li>
+                        <span><strong>${strength.dimension}</strong></span>
+                        <span class="score-value" style="font-size: 1.5rem;">${strength.score.toFixed(1)}</span>
+                    </li>
+                `;
+            });
+
+            // Mostrar oportunidades
+            const opportunitiesList = document.getElementById('opportunities-list');
+            resultsData.topOpportunities.forEach(opp => {
+                opportunitiesList.innerHTML += `
+                    <li>
+                        <span><strong>${opp.dimension}</strong></span>
+                        <span class="score-value" style="font-size: 1.5rem;">${opp.score.toFixed(1)}</span>
+                    </li>
+                `;
+            });
+        }
+
+        /**
+         * Envía los resultados por email (requiere configuración de backend)
+         */
+        function sendResultsByEmail() {
+            const userData = JSON.parse(localStorage.getItem('assessmentData'));
+            const email = userData.email;
+            
+            // Por ahora, abre el cliente de email del usuario
+            // En producción, esto se haría con un backend
+            const subject = encodeURIComponent('Resultados de tu Diagnóstico de Liderazgo');
+            const body = encodeURIComponent(`Hola ${userData.name},\n\nGracias por completar el Diagnóstico de Liderazgo.\n\nTu reporte completo está disponible en: ${window.location.href}\n\nPara descargar tu reporte en PDF, haz click en "Descargar PDF" en la página de resultados.\n\n¿Quieres profundizar? Responde a este email mencionando "Sesión Estratégica".\n\nSaludos,\nConsultora Estratégica Empresarial`);
+            
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        }
+
+        // Cargar resultados cuando la página esté lista
+        window.addEventListener('DOMContentLoaded', displayResults);
     </script>
 </body>
 </html>
