@@ -1,0 +1,626 @@
+/* ==========================================================================
+   ESTILOS GLOBALES - LEADERSHIP ASSESSMENT
+   ========================================================================== */
+
+/* Variables CSS - Paleta de colores profesional */
+:root {
+    --primary-color: #2563eb;      /* Azul profesional */
+    --primary-dark: #1e40af;
+    --secondary-color: #10b981;     /* Verde éxito */
+    --accent-color: #f59e0b;        /* Amarillo/naranja atención */
+    --text-dark: #1f2937;
+    --text-medium: #4b5563;
+    --text-light: #6b7280;
+    --background: #ffffff;
+    --background-light: #f9fafb;
+    --border-color: #e5e7eb;
+    --error-color: #ef4444;
+    --success-color: #10b981;
+    
+    /* Espaciado */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Tipografía */
+    --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos base del body */
+body {
+    font-family: var(--font-base);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: var(--spacing-md);
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--background);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   NAVEGACIÓN ENTRE PANTALLAS
+   ========================================================================== */
+
+.screen {
+    display: none;
+    padding: var(--spacing-xl);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   BARRA DE PROGRESO
+   ========================================================================== */
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--background-light);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    text-align: center;
+    color: var(--text-medium);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ==========================================================================
+   PANTALLA DE BIENVENIDA
+   ========================================================================== */
+
+.welcome-content {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+}
+
+.main-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-xl);
+}
+
+.benefits {
+    display: grid;
+    gap: var(--spacing-md);
+    margin: var(--spacing-xl) 0;
+    text-align: left;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--background-light);
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.benefit-item:hover {
+    transform: translateX(8px);
+}
+
+.benefit-item .icon {
+    font-size: var(--font-size-xl);
+    flex-shrink: 0;
+}
+
+.benefit-item p {
+    margin: 0;
+    color: var(--text-medium);
+}
+
+.privacy-note {
+    font-size: var(--font-size-sm);
+    color: var(--text-light);
+    margin: var(--spacing-lg) 0;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   TIPOGRAFÍA
+   ========================================================================== */
+
+.section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ==========================================================================
+   FORMULARIOS
+   ========================================================================== */
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xs);
+}
+
+.required {
+    color: var(--error-color);
+}
+
+.optional {
+    font-weight: 400;
+    color: var(--text-light);
+    font-size: var(--font-size-sm);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: var(--font-size-base);
+    font-family: var(--font-base);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group small {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--text-light);
+}
+
+/* Radio buttons personalizados */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.radio-option:hover {
+    border-color: var(--primary-color);
+    background: var(--background-light);
+}
+
+.radio-option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin-right: var(--spacing-sm);
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.radio-option input[type="radio"]:checked + span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   BOTONES
+   ========================================================================== */
+
+.btn-primary,
+.btn-secondary {
+    padding: 14px 32px;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-base);
+    width: 100%;
+    max-width: 300px;
+    margin: var(--spacing-md) auto;
+    display: block;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+    background: var(--background-light);
+    color: var(--text-dark);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   CAJA DE INSTRUCCIONES
+   ========================================================================== */
+
+.instructions-box {
+    background: var(--background-light);
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    margin: var(--spacing-xl) 0;
+}
+
+.instructions-box p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-medium);
+}
+
+.scale-legend {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: 8px;
+}
+
+.scale-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.scale-item:last-child {
+    border-bottom: none;
+}
+
+.scale-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.scale-label {
+    color: var(--text-medium);
+}
+
+.tip-box {
+    background: #fef3c7;
+    border-left: 4px solid var(--accent-color);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    margin-top: var(--spacing-lg);
+}
+
+.tip-box strong {
+    color: var(--text-dark);
+}
+
+/* ==========================================================================
+   PREGUNTAS
+   ========================================================================== */
+
+.dimension-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--primary-color);
+    color: white;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border-radius: 20px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.question-container {
+    margin: var(--spacing-xl) 0;
+}
+
+.question-text {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.4;
+}
+
+/* Escala de Likert */
+.likert-scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.likert-option {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.likert-option:hover {
+    border-color: var(--primary-color);
+    background: var(--background-light);
+}
+
+.likert-option input[type="radio"] {
+    display: none;
+}
+
+.likert-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--background-light);
+    color: var(--text-medium);
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    margin-right: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.likert-label {
+    flex: 1;
+    color: var(--text-medium);
+    font-weight: 500;
+}
+
+.likert-option input[type="radio"]:checked ~ .likert-number {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.likert-option input[type="radio"]:checked ~ .likert-label {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   NAVEGACIÓN DE PREGUNTAS
+   ========================================================================== */
+
+.navigation-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-xl);
+}
+
+.navigation-buttons .btn-primary,
+.navigation-buttons .btn-secondary {
+    max-width: 200px;
+}
+
+/* ==========================================================================
+   PANTALLA DE CARGA
+   ========================================================================== */
+
+.loading-content {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto var(--spacing-xl);
+    border: 4px solid var(--background-light);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-content h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.loading-content p {
+    color: var(--text-medium);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.site-footer {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: white;
+    font-size: var(--font-size-sm);
+}
+
+.site-footer a {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   RESPONSIVE - MOBILE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-3xl: 1.875rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-xl: 1.25rem;
+    }
+
+    body {
+        padding: var(--spacing-xs);
+    }
+
+    .screen {
+        padding: var(--spacing-lg);
+    }
+
+    .main-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .benefits {
+        gap: var(--spacing-sm);
+    }
+
+    .benefit-item {
+        padding: var(--spacing-sm);
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+    }
+
+    .navigation-buttons .btn-primary,
+    .navigation-buttons .btn-secondary {
+        max-width: 100%;
+    }
+
+    .likert-option {
+        padding: var(--spacing-sm);
+    }
+
+    .likert-number {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-base);
+    }
+
+    .question-text {
+        font-size: var(--font-size-lg);
+    }
+}
+
+/* ==========================================================================
+   UTILIDADES
+   ========================================================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-lg {
+    margin-top: var(--spacing-lg);
+}
+
+.mb-lg {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Estados de validación */
+.form-group.error input,
+.form-group.error select {
+    border-color: var(--error-color);
+}
+
+.form-group.error small {
+    color: var(--error-color);
+}
+
+.form-group.success input,
+.form-group.success select {
+    border-color: var(--success-color);
+}
