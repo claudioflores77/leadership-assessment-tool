@@ -251,6 +251,9 @@ function updateProgress(percentage) {
 
 // Cuando el DOM esté listo, configurar el formulario de perfil
 document.addEventListener('DOMContentLoaded', function() {
+    // Intentar detectar país automáticamente
+    detectUserCountry();
+
     const profileForm = document.getElementById('profile-form');
     
     if (profileForm) {
@@ -539,6 +542,44 @@ function resetAssessment() {
 
 // Hacer algunas funciones accesibles globalmente para debugging
 window.resetAssessment = resetAssessment;
+
+/**
+ * Detecta el país del usuario mediante API gratuita para simplificar el formulario
+ */
+function detectUserCountry() {
+    // Usamos ipapi.co que ofrece detección gratuita (con límites razonables)
+    fetch('https://ipapi.co/json/')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            const countrySelect = document.getElementById('country');
+            const userCountry = data.country_name; // Nombre en inglés generalmente
+
+            if (countrySelect && userCountry) {
+                // Intentar encontrar el país en las opciones
+                let found = false;
+                for (let i = 0; i < countrySelect.options.length; i++) {
+                    // Comparación simple, podría mejorarse con un mapa de traducciones
+                    if (countrySelect.options[i].text.includes(userCountry) ||
+                        userCountry.includes(countrySelect.options[i].text)) {
+                        countrySelect.selectedIndex = i;
+                        found = true;
+                        break;
+                    }
+                }
+
+                // Si no se encuentra, tal vez el usuario está en un país de habla hispana listado
+                if (!found && data.country_code) {
+                    // Mapeo básico de códigos a nombres en español si es necesario
+                    // Por ahora confiamos en la coincidencia de texto
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log('No se pudo detectar el país automáticamente, el usuario deberá seleccionarlo.');
+        });
+}
 
 /* ============================================================================
    INICIALIZACIÓN
