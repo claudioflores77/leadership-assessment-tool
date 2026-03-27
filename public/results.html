@@ -2,271 +2,120 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tus Resultados - Diagnóstico de Liderazgo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Tu Diagnóstico de Liderazgo — Resultados</title>
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        /* Estilos específicos para la página de resultados */
-        .results-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .results-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .results-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .results-body {
-            padding: 2rem;
-        }
-
-        .score-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .global-score {
-            font-size: 4rem;
-            font-weight: 700;
-            margin: 1rem 0;
-        }
-
-        .global-level {
-            font-size: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .dimensions-grid {
-            display: grid;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .dimension-card {
-            background: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid #2563eb;
-        }
-
-        .dimension-card h3 {
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-            font-size: 1.125rem;
-        }
-
-        .dimension-score {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .score-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2563eb;
-        }
-
-        .level-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .level-Excepcional {
-            background: #10b981;
-            color: white;
-        }
-
-        .level-Efectivo {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .level-En-desarrollo {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .level-Oportunidad-crítica {
-            background: #ef4444;
-            color: white;
-        }
-
-        .strengths-box,
-        .opportunities-box {
-            background: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .strengths-box {
-            border-left: 4px solid #10b981;
-        }
-
-        .opportunities-box {
-            border-left: 4px solid #f59e0b;
-        }
-
-        .item-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .item-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .item-list li:last-child {
-            border-bottom: none;
-        }
-
-        .cta-section {
-            background: #f9fafb;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: #1e40af;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        .actions-bar {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .btn-action {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid #2563eb;
-            background: white;
-            color: #2563eb;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-action:hover {
-            background: #2563eb;
-            color: white;
-        }
-
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            .actions-bar,
-            .cta-section {
-                display: none;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="results-container">
+
+        <!-- Header -->
         <div class="results-header">
             <h1>Tu Diagnóstico de Liderazgo</h1>
-            <p class="subtitle" id="participant-name">Participante</p>
-            <p id="assessment-date"></p>
+            <div class="participant-info">
+                <span id="participant-name"></span> · <span id="assessment-date"></span>
+            </div>
         </div>
 
         <div class="results-body">
-            <!-- Barra de acciones -->
+
+            <!-- Acciones -->
             <div class="actions-bar">
                 <button class="btn-action" onclick="window.print()">📄 Descargar PDF</button>
-                <button class="btn-action" onclick="sendResultsByEmail()">📧 Enviar por Email</button>
-                <a href="index.html" class="btn-action">🔄 Hacer de Nuevo</a>
+                <a href="index.html" class="btn-action">🔄 Hacer de nuevo</a>
             </div>
 
             <!-- Puntaje Global -->
             <div class="score-card">
-                <h2>Tu Puntaje Global de Liderazgo</h2>
-                <div class="global-score" id="global-score">-</div>
-                <div class="global-level" id="global-level">-</div>
+                <div class="global-score" id="global-score">—<span>/5</span></div>
+                <div class="global-level" id="global-level"></div>
             </div>
 
-            <!-- Resultados por Dimensión -->
-            <h2>Resultados por Dimensión</h2>
-            <div class="dimensions-grid" id="dimensions-grid">
-                <!-- Se llenará dinámicamente -->
+            <!-- Perfil de Liderazgo -->
+            <div class="profile-badge" id="profile-badge">
+                <div class="profile-label">Tu perfil</div>
+                <div class="profile-name" id="profile-name"></div>
+                <div class="profile-description" id="profile-desc"></div>
             </div>
 
-            <!-- Top 2 Fortalezas -->
-            <div class="strengths-box">
-                <h2>🌟 Tus Top 2 Fortalezas</h2>
-                <p>Estas son las competencias donde ya estás generando impacto significativo.</p>
-                <ul class="item-list" id="strengths-list">
-                    <!-- Se llenará dinámicamente -->
-                </ul>
+            <!-- Dimensiones -->
+            <div class="dimensions-section">
+                <h2>Tus 5 dimensiones de liderazgo</h2>
+                <div id="dimensions-grid"></div>
             </div>
 
-            <!-- Top 3 Oportunidades -->
-            <div class="opportunities-box">
-                <h2>🎯 Tus Top 3 Oportunidades de Desarrollo</h2>
-                <p>Estas son las áreas donde invertir en desarrollo tendrá el mayor retorno.</p>
-                <ul class="item-list" id="opportunities-list">
-                    <!-- Se llenará dinámicamente -->
-                </ul>
+            <!-- Fortalezas -->
+            <div class="analysis-box strengths">
+                <h2>🌟 Tus 2 fortalezas principales</h2>
+                <div id="strengths-list"></div>
             </div>
 
-            <!-- Call to Action -->
+            <!-- Oportunidades -->
+            <div class="analysis-box opportunities">
+                <h2>🎯 Tus 3 mayores oportunidades</h2>
+                <div id="opportunities-list"></div>
+            </div>
+
+            <!-- Recomendaciones -->
+            <div class="recommendations-section" id="recommendations-section">
+                <h2>3 acciones que podés implementar esta semana</h2>
+                <p class="rec-intro" id="rec-intro"></p>
+                <div id="recommendations-list"></div>
+            </div>
+
+            <!-- Separador visual -->
+            <div style="height:1px; background:var(--border); margin:2rem 0;"></div>
+
+            <!-- El "gap abierto" — lo que queda por descubrir -->
+            <div style="text-align:center; padding: 1.5rem 0 0.5rem;">
+                <p style="font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--text-primary); margin-bottom:0.75rem;">
+                    Esto es lo que ves vos.<br>¿Pero cómo te ve tu equipo?
+                </p>
+                <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6; max-width:440px; margin:0 auto 1.5rem;">
+                    Las autoevaluaciones capturan tu percepción. Pero la investigación muestra que los líderes se califican ~40% más positivamente que sus equipos. 
+                    Los <strong>puntos ciegos</strong> — áreas donde creés que estás bien pero tu equipo no lo percibe así — son la causa #1 de estancamiento en roles de liderazgo.
+                </p>
+            </div>
+
+            <!-- CTA Principal -->
             <div class="cta-section">
-                <h2>¿Quieres Profundizar?</h2>
-                <p>Este diagnóstico te da una primera fotografía. Para acelerar tu desarrollo, considera:</p>
-                <ul style="text-align: left; max-width: 600px; margin: 1rem auto;">
-                    <li><strong>Diagnóstico 360°:</strong> Descubre cómo te ven tu jefe, pares y equipo</li>
-                    <li><strong>Sesión Estratégica (30 min, sin costo):</strong> Diseñamos las 3 acciones de mayor impacto</li>
-                </ul>
-                <a href="mailto:contactofba@gmail.com?subject=Diagnóstico de Liderazgo - Próximo Paso" class="cta-button">
-                    Agenda tu Sesión Estratégica
+                <h2>Sesión Estratégica<br>personalizada</h2>
+                
+                <div class="cta-details">
+                    <div class="cta-detail-item">
+                        <span class="cta-icon">✓</span>
+                        <span>Revisamos tu diagnóstico juntos — sin filtros</span>
+                    </div>
+                    <div class="cta-detail-item">
+                        <span class="cta-icon">✓</span>
+                        <span>Identificamos las 3 palancas de mayor impacto para tu situación</span>
+                    </div>
+                    <div class="cta-detail-item">
+                        <span class="cta-icon">✓</span>
+                        <span>Diseñamos un plan concreto para los próximos 90 días</span>
+                    </div>
+                </div>
+
+                <a href="https://estrategiaempresaria.systeme.io/sesionestrategica1a1" 
+                   target="_blank" 
+                   class="btn-gold"
+                   id="cta-button">
+                    Agendar mi sesión estratégica
                 </a>
+
+                <p class="cta-guarantee">Sin costo · Sin compromiso · 45 minutos de conversación útil</p>
             </div>
+
+            <!-- Share -->
+            <div class="share-section">
+                <p>¿Conocés a otro líder que necesite esto?</p>
+                <div class="share-buttons">
+                    <button class="share-btn" onclick="shareWhatsApp()">💬 WhatsApp</button>
+                    <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
+                    <button class="share-btn" onclick="copyLink()">🔗 Copiar link</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -275,84 +124,163 @@
     </footer>
 
     <script>
-        /**
-         * Muestra los resultados cargándolos desde localStorage
-         */
-        function displayResults() {
-            // Obtener datos del localStorage
-            const resultsData = JSON.parse(localStorage.getItem('assessmentResults'));
-            const userData = JSON.parse(localStorage.getItem('assessmentData'));
-
-            // Si no hay datos, redirigir al inicio
-            if (!resultsData || !userData) {
-                alert('No hay resultados disponibles. Por favor completa el assessment primero.');
-                window.location.href = 'index.html';
-                return;
-            }
-
-            // Mostrar información del participante
-            document.getElementById('participant-name').textContent = userData.name || 'Participante';
-            document.getElementById('assessment-date').textContent = 'Fecha: ' + resultsData.date;
-
-            // Mostrar puntaje global
-            document.getElementById('global-score').textContent = resultsData.globalScore.toFixed(1);
-            document.getElementById('global-level').textContent = 'Nivel: ' + resultsData.globalLevel;
-
-            // Mostrar dimensiones
-            const dimensionsGrid = document.getElementById('dimensions-grid');
-            Object.entries(resultsData.dimensionScores).forEach(([dimId, data]) => {
-                const levelClass = 'level-' + data.level.replace(/ /g, '-');
-                dimensionsGrid.innerHTML += `
-                    <div class="dimension-card">
-                        <h3>${data.name}</h3>
-                        <div class="dimension-score">
-                            <span class="score-value">${data.score.toFixed(1)}</span>
-                            <span class="level-badge ${levelClass}">${data.level}</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Mostrar fortalezas
-            const strengthsList = document.getElementById('strengths-list');
-            resultsData.topStrengths.forEach(strength => {
-                strengthsList.innerHTML += `
-                    <li>
-                        <span><strong>${strength.dimension}</strong></span>
-                        <span class="score-value" style="font-size: 1.5rem;">${strength.score.toFixed(1)}</span>
-                    </li>
-                `;
-            });
-
-            // Mostrar oportunidades
-            const opportunitiesList = document.getElementById('opportunities-list');
-            resultsData.topOpportunities.forEach(opp => {
-                opportunitiesList.innerHTML += `
-                    <li>
-                        <span><strong>${opp.dimension}</strong></span>
-                        <span class="score-value" style="font-size: 1.5rem;">${opp.score.toFixed(1)}</span>
-                    </li>
-                `;
+    /* ================================================================
+       RENDERIZAR RESULTADOS
+       ================================================================ */
+    
+    function displayResults() {
+        var results = JSON.parse(localStorage.getItem('assessmentResults'));
+        var userData = JSON.parse(localStorage.getItem('assessmentData'));
+        
+        if (!results || !userData) {
+            alert('No hay resultados disponibles. Por favor completá el diagnóstico primero.');
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        // ── Info del participante ──
+        document.getElementById('participant-name').textContent = userData.name || 'Participante';
+        document.getElementById('assessment-date').textContent = results.date;
+        
+        // ── Puntaje global ──
+        document.getElementById('global-score').innerHTML = results.globalScore.toFixed(1) + '<span>/5</span>';
+        
+        var levelEl = document.getElementById('global-level');
+        levelEl.textContent = results.globalLevel;
+        levelEl.className = 'global-level level-' + results.globalLevelClass;
+        
+        // ── Perfil de liderazgo ──
+        document.getElementById('profile-name').textContent = results.profile.name;
+        document.getElementById('profile-desc').textContent = results.profile.description;
+        
+        // ── Dimensiones ──
+        var grid = document.getElementById('dimensions-grid');
+        var dims = results.dimensionScores;
+        var dimOrder = ['D1','D2','D3','D4','D5'];
+        
+        dimOrder.forEach(function(dimId) {
+            var d = dims[dimId];
+            var barWidth = (d.score / 5 * 100).toFixed(0);
+            
+            var card = document.createElement('div');
+            card.className = 'dimension-card';
+            card.innerHTML = 
+                '<div class="dimension-card-header">' +
+                    '<h3>' + d.name + '</h3>' +
+                    '<span class="score-value">' + d.score.toFixed(1) + '</span>' +
+                '</div>' +
+                '<div class="dimension-bar">' +
+                    '<div class="dimension-bar-fill ' + d.barClass + '" style="width:' + barWidth + '%"></div>' +
+                '</div>' +
+                '<span class="level-badge level-' + d.levelClass + '">' + d.level + '</span>' +
+                '<p class="dimension-interpretation">' + d.interpretation + '</p>';
+            
+            grid.appendChild(card);
+        });
+        
+        // ── Fortalezas ──
+        var strengthsEl = document.getElementById('strengths-list');
+        results.topStrengths.forEach(function(s) {
+            var item = document.createElement('div');
+            item.className = 'analysis-item';
+            item.innerHTML = '<span class="dim-name">' + s.dimension + '</span>' +
+                             '<span class="dim-score">' + s.score.toFixed(1) + '</span>';
+            strengthsEl.appendChild(item);
+        });
+        
+        // ── Oportunidades ──
+        var oppsEl = document.getElementById('opportunities-list');
+        results.topOpportunities.forEach(function(o) {
+            var item = document.createElement('div');
+            item.className = 'analysis-item';
+            item.innerHTML = '<span class="dim-name">' + o.dimension + '</span>' +
+                             '<span class="dim-score">' + o.score.toFixed(1) + '</span>';
+            oppsEl.appendChild(item);
+        });
+        
+        // ── Recomendaciones ──
+        var lowestName = dims[results.lowestDimension].name;
+        document.getElementById('rec-intro').textContent = 
+            'Basadas en tu dimensión con mayor oportunidad: ' + lowestName;
+        
+        var recsEl = document.getElementById('recommendations-list');
+        if (results.recommendations) {
+            results.recommendations.forEach(function(rec, i) {
+                var card = document.createElement('div');
+                card.className = 'recommendation-card';
+                card.innerHTML = 
+                    '<h3>' + (i+1) + '. ' + rec.title + '</h3>' +
+                    '<p>' + rec.text + '</p>' +
+                    '<div class="rec-action">📌 <strong>Acción inmediata:</strong> ' + rec.action + '</div>';
+                recsEl.appendChild(card);
             });
         }
-
-        /**
-         * Envía los resultados por email (requiere configuración de backend)
-         */
-        function sendResultsByEmail() {
-            const userData = JSON.parse(localStorage.getItem('assessmentData'));
-            const email = userData.email;
-            
-            // Por ahora, abre el cliente de email del usuario
-            // En producción, esto se haría con un backend
-            const subject = encodeURIComponent('Resultados de tu Diagnóstico de Liderazgo');
-            const body = encodeURIComponent(`Hola ${userData.name},\n\nGracias por completar el Diagnóstico de Liderazgo.\n\nTu reporte completo está disponible en: ${window.location.href}\n\nPara descargar tu reporte en PDF, haz click en "Descargar PDF" en la página de resultados.\n\n¿Quieres profundizar? Responde a este email mencionando "Sesión Estratégica".\n\nSaludos,\nConsultora Estratégica Empresarial`);
-            
-            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        
+        // Animar las barras después de un momento
+        setTimeout(function() {
+            document.querySelectorAll('.dimension-bar-fill').forEach(function(bar) {
+                bar.style.transition = 'width 0.8s ease';
+            });
+        }, 300);
+        
+        // ── CTA personalizado según puntaje ──
+        var ctaBtn = document.getElementById('cta-button');
+        var gapText = document.querySelector('.cta-section h2');
+        
+        if (results.globalScore >= 4.5) {
+            if (gapText) gapText.innerHTML = 'Tu siguiente nivel:<br>multiplicar tu impacto';
+            if (ctaBtn) ctaBtn.textContent = 'Agendar sesión de escalamiento';
+        } else if (results.globalScore >= 3.8) {
+            if (gapText) gapText.innerHTML = 'Sesión Estratégica<br>personalizada';
+            if (ctaBtn) ctaBtn.textContent = 'Agendar mi sesión estratégica';
+        } else if (results.globalScore >= 3.0) {
+            if (gapText) gapText.innerHTML = 'Tu plan de acción<br>en 45 minutos';
+            if (ctaBtn) ctaBtn.textContent = 'Quiero mi plan de acción';
+        } else {
+            if (gapText) gapText.innerHTML = 'Este es tu momento<br>de cambiar el juego';
+            if (ctaBtn) ctaBtn.textContent = 'Dar el primer paso — agendar sesión';
         }
-
-        // Cargar resultados cuando la página esté lista
-        window.addEventListener('DOMContentLoaded', displayResults);
+    }
+    
+    /* ================================================================
+       COMPARTIR
+       ================================================================ */
+    
+    function shareWhatsApp() {
+        var text = '¿Qué tan efectivo es tu liderazgo? Acabo de hacer este diagnóstico gratuito y me sorprendieron los resultados. Probalo: https://leadership-assessment-tool.vercel.app/';
+        window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    }
+    
+    function shareLinkedIn() {
+        var url = 'https://leadership-assessment-tool.vercel.app/';
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank');
+    }
+    
+    function copyLink() {
+        var url = 'https://leadership-assessment-tool.vercel.app/';
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(function() {
+                var btn = document.querySelector('.share-btn:last-child');
+                btn.textContent = '✓ Copiado';
+                setTimeout(function() { btn.textContent = '🔗 Copiar link'; }, 2000);
+            });
+        } else {
+            // Fallback
+            var input = document.createElement('input');
+            input.value = url;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Link copiado');
+        }
+    }
+    
+    /* ================================================================
+       INICIALIZACIÓN
+       ================================================================ */
+    
+    window.addEventListener('DOMContentLoaded', displayResults);
     </script>
 </body>
 </html>
