@@ -2,85 +2,137 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Diagnóstico gratuito de efectividad en liderazgo. Evalúa tus competencias en 10 minutos.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Diagnóstico gratuito de liderazgo para líderes y empresarios. Descubrí tu perfil en 5 minutos.">
+    <meta property="og:title" content="¿Qué tan efectivo es tu liderazgo? — Diagnóstico gratuito">
+    <meta property="og:description" content="Evaluá tus competencias de liderazgo en 5 minutos y recibí recomendaciones personalizadas.">
+    <meta property="og:type" content="website">
     <title>Diagnóstico de Liderazgo | Consultora Estratégica Empresarial</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Contenedor principal -->
     <div class="container">
         
         <div class="logo-container">
-            <img src="images/logo.png" alt="Consultora Estratégica" class="logo-img">
+            <img src="images/logo.png" alt="Consultora Estratégica" class="logo-img"
+                 onerror="this.style.display='none'">
         </div>
 
-        <!-- PANTALLA 1: Bienvenida -->
+        <!-- ════════════════════════════════════════════════════════════════
+             PANTALLA 1: BIENVENIDA
+             ════════════════════════════════════════════════════════════════ -->
         <section id="welcome-screen" class="screen active">
-            <div class="welcome-content">
-                <h1 class="main-title">¿Qué tan efectivo es tu liderazgo?</h1>
-                <p class="subtitle">Descubre tus fortalezas y áreas de mejora en 10 minutos</p>
+            <div class="welcome-screen-inner" style="text-align:center;">
+                <div class="hero-badge">Diagnóstico gratuito</div>
                 
-                <div class="benefits">
-                    <div class="benefit-item">
-                        <span class="icon">✅</span>
-                        <p>Evaluación de 5 competencias críticas de liderazgo</p>
-                    </div>
+                <h1 class="main-title">¿Qué tan efectivo es <em>tu liderazgo</em>?</h1>
+                
+                <p class="subtitle">Descubrí tu perfil de líder en 5 minutos.<br>
+                Sin teoría, sin vueltas — respuestas que podés usar hoy.</p>
+
+                <div class="pain-points" style="text-align:left;">
+                    <h3>¿Te suena alguna de estas?</h3>
+                    <div class="pain-item">Tu equipo no se compromete como vos esperás</div>
+                    <div class="pain-item">Trabajás más horas que todos y los resultados no mejoran</div>
+                    <div class="pain-item">No lográs delegar sin que todo se caiga</div>
+                    <div class="pain-item">Sentís que estás solo/a con todo el peso</div>
+                </div>
+
+                <div class="benefits" style="text-align:left;">
                     <div class="benefit-item">
                         <span class="icon">📊</span>
-                        <p>Reporte personalizado con tu perfil completo</p>
+                        <p>Tu perfil de liderazgo con nombre y descripción</p>
                     </div>
                     <div class="benefit-item">
                         <span class="icon">🎯</span>
-                        <p>3 recomendaciones específicas de desarrollo</p>
+                        <p>3 recomendaciones que podés aplicar esta semana</p>
                     </div>
                     <div class="benefit-item">
                         <span class="icon">⏱️</span>
-                        <p>Solo 8-10 minutos de tu tiempo</p>
+                        <p>Solo 5 minutos — 25 preguntas rápidas</p>
                     </div>
                 </div>
 
-                <p class="privacy-note">Tus respuestas son confidenciales y solo tú tendrás acceso a ellas.</p>
+                <p class="privacy-note">Tus respuestas son confidenciales. No compartimos tus datos.</p>
 
-                <button class="btn-primary" onclick="startAssessment()">Comenzar Diagnóstico</button>
+                <button class="btn-primary" onclick="startQuestions()">Comenzar diagnóstico</button>
             </div>
         </section>
 
-        <!-- PANTALLA 2: Perfil Demográfico -->
-        <section id="profile-screen" class="screen">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+        <!-- ════════════════════════════════════════════════════════════════
+             PANTALLA 2: PREGUNTAS (con micro-insights entre dimensiones)
+             ════════════════════════════════════════════════════════════════ -->
+        <section id="questions-screen" class="screen">
+            <div class="progress-wrapper">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="questions-progress" style="width:0%"></div>
+                </div>
+                <p class="progress-text" id="questions-progress-text">Pregunta 1 de 25</p>
             </div>
-            <p class="progress-text">Paso 1 de 6 - Perfil</p>
 
-            <h2 class="section-title">Primero, cuéntanos sobre ti</h2>
-            <p class="section-subtitle">Esto nos ayudará a personalizar tus resultados</p>
+            <div class="dimension-badge" id="dimension-badge"></div>
+
+            <div class="question-container" id="question-container">
+                <!-- Preguntas se cargan dinámicamente -->
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn-secondary" id="prev-btn" onclick="previousQuestion()" style="display:none;">Anterior</button>
+                <button class="btn-primary" id="next-btn" onclick="nextQuestion()">Siguiente</button>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             MICRO-INSIGHTS (aparecen entre bloques de dimensión)
+             ════════════════════════════════════════════════════════════════ -->
+        <section id="insight-screen" class="micro-insight">
+            <div class="insight-card" id="insight-card">
+                <span class="insight-icon" id="insight-icon">💡</span>
+                <div class="insight-stat" id="insight-stat">73%</div>
+                <p class="insight-text" id="insight-text">Loading...</p>
+                <span class="insight-source" id="insight-source">Fuente</span>
+            </div>
+            <div style="margin-top:1.5rem;">
+                <button class="btn-primary" onclick="continueAfterInsight()">Continuar</button>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             PANTALLA 3: DATOS (ahora AL FINAL, después de responder)
+             ════════════════════════════════════════════════════════════════ -->
+        <section id="profile-screen" class="screen">
+            <div style="text-align:center; padding-top:1rem;">
+                <h2 class="section-title">¡Listo! Tu diagnóstico está casi listo</h2>
+                <p class="section-subtitle">Completá estos datos para generar tu reporte personalizado y recibir tus resultados.</p>
+            </div>
 
             <form id="profile-form">
-                <!-- Nombre -->
+                <!-- Botón volver -->
+                <div style="margin-bottom:1.5rem;">
+                    <button type="button" class="btn-secondary" onclick="goBackToQuestions()" style="max-width:200px; margin:0; font-size:0.85rem; padding:10px 16px;">
+                        ← Volver a las preguntas
+                    </button>
+                </div>
                 <div class="form-group">
-                    <label for="name">¿Cuál es tu nombre? <span class="optional">(opcional)</span></label>
-                    <input type="text" id="name" name="name" placeholder="Tu nombre" autocomplete="name">
+                    <label for="name">Tu nombre <span class="optional">(opcional)</span></label>
+                    <input type="text" id="name" name="name" placeholder="¿Cómo te llamás?" autocomplete="name">
                 </div>
 
-                <!-- Email -->
                 <div class="form-group">
-                    <label for="email">¿Cuál es tu email? <span class="required">*</span></label>
+                    <label for="email">Tu email <span class="required">*</span></label>
                     <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email">
-                    <small>Te enviaremos tus resultados a este correo</small>
+                    <small>Para enviarte tu reporte completo en PDF</small>
                 </div>
 
-                <!-- País -->
                 <div class="form-group">
-                    <label for="country">¿En qué país trabajas actualmente? <span class="required">*</span></label>
+                    <label for="country">País donde trabajás <span class="required">*</span></label>
                     <select id="country" name="country" required>
-                        <option value="">Selecciona tu país</option>
+                        <option value="">Seleccioná tu país</option>
                         <option value="Argentina">Argentina</option>
                         <option value="Bolivia">Bolivia</option>
                         <option value="Chile">Chile</option>
                         <option value="Colombia">Colombia</option>
                         <option value="Costa Rica">Costa Rica</option>
-                        <option value="Cuba">Cuba</option>
                         <option value="Ecuador">Ecuador</option>
                         <option value="El Salvador">El Salvador</option>
                         <option value="España">España</option>
@@ -100,21 +152,16 @@
                     </select>
                 </div>
 
-                <!-- Nivel de Responsabilidad -->
                 <div class="form-group">
-                    <label>¿Cuál es tu nivel de responsabilidad actual? <span class="required">*</span></label>
+                    <label>¿Cuál es tu rol actual? <span class="required">*</span></label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="radio" name="role" value="Gerente / Jefe de Área" required>
-                            <span>Gerente / Jefe de Área (gestiono un equipo)</span>
+                            <span>Gerente / Jefe de Área</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="role" value="Director / Gerente Senior">
-                            <span>Director / Gerente Senior (gestiono a otros gerentes)</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="role" value="C-Level / Alta Dirección">
-                            <span>C-Level / Alta Dirección (CEO, COO, CFO, etc.)</span>
+                            <span>Director / Gerente Senior</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="role" value="Dueño / Fundador">
@@ -122,14 +169,13 @@
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="role" value="Otro">
-                            <span>Otro</span>
+                            <span>Otro rol de liderazgo</span>
                         </label>
                     </div>
                 </div>
 
-                <!-- Tamaño del Equipo -->
                 <div class="form-group">
-                    <label>¿Cuántas personas reportan directa o indirectamente a ti? <span class="required">*</span></label>
+                    <label>¿Cuántas personas liderás? <span class="required">*</span></label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="radio" name="teamSize" value="1-5 personas" required>
@@ -144,102 +190,33 @@
                             <span>16-50 personas</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="teamSize" value="51-100 personas">
-                            <span>51-100 personas</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="teamSize" value="Más de 100 personas">
-                            <span>Más de 100 personas</span>
+                            <input type="radio" name="teamSize" value="Más de 50 personas">
+                            <span>Más de 50 personas</span>
                         </label>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-primary">Continuar</button>
+                <button type="submit" class="btn-primary">Ver mis resultados</button>
             </form>
         </section>
 
-        <!-- PANTALLA 3: Instrucciones -->
-        <section id="instructions-screen" class="screen">
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 20%"></div>
-            </div>
-            <p class="progress-text">Paso 2 de 6 - Instrucciones</p>
-
-            <h2 class="section-title">Evaluación de Competencias</h2>
-            
-            <div class="instructions-box">
-                <p>A continuación, encontrarás <strong>25 afirmaciones</strong> sobre comportamientos de liderazgo.</p>
-                
-                <p>Para cada una, indica con qué <strong>FRECUENCIA</strong> describes este comportamiento en tu rol actual:</p>
-
-                <div class="scale-legend">
-                    <div class="scale-item">
-                        <span class="scale-number">1</span>
-                        <span class="scale-label">Nunca o casi nunca</span>
-                    </div>
-                    <div class="scale-item">
-                        <span class="scale-number">2</span>
-                        <span class="scale-label">Rara vez</span>
-                    </div>
-                    <div class="scale-item">
-                        <span class="scale-number">3</span>
-                        <span class="scale-label">A veces</span>
-                    </div>
-                    <div class="scale-item">
-                        <span class="scale-number">4</span>
-                        <span class="scale-label">Frecuentemente</span>
-                    </div>
-                    <div class="scale-item">
-                        <span class="scale-number">5</span>
-                        <span class="scale-label">Siempre o casi siempre</span>
-                    </div>
-                </div>
-
-                <div class="tip-box">
-                    <strong>💡 Consejo:</strong> Sé honesto/a. No hay respuestas correctas o incorrectas. 
-                    Esto es sobre <strong>autoconocimiento</strong>, no sobre una calificación.
-                </div>
-            </div>
-
-            <button class="btn-primary" onclick="startQuestions()">Comenzar Evaluación</button>
-        </section>
-
-        <!-- PANTALLAS 4-8: Preguntas por Dimensión -->
-        <section id="questions-screen" class="screen">
-            <div class="progress-bar">
-                <div class="progress-fill" id="questions-progress"></div>
-            </div>
-            <p class="progress-text" id="questions-progress-text">Pregunta 1 de 25</p>
-
-            <div class="dimension-badge" id="dimension-badge">Comunicación y Alineamiento Estratégico</div>
-
-            <div class="question-container" id="question-container">
-                <!-- Las preguntas se cargarán dinámicamente aquí -->
-            </div>
-
-            <div class="navigation-buttons">
-                <button class="btn-secondary" id="prev-btn" onclick="previousQuestion()" style="display: none;">Anterior</button>
-                <button class="btn-primary" id="next-btn" onclick="nextQuestion()">Siguiente</button>
-            </div>
-        </section>
-
-        <!-- PANTALLA 9: Cargando Resultados -->
+        <!-- ════════════════════════════════════════════════════════════════
+             PANTALLA 4: CARGA
+             ════════════════════════════════════════════════════════════════ -->
         <section id="loading-screen" class="screen">
             <div class="loading-content">
                 <div class="spinner"></div>
-                <h2>Analizando tus respuestas...</h2>
-                <p>Estamos generando tu perfil de liderazgo personalizado</p>
+                <h2>Generando tu perfil de liderazgo...</h2>
+                <p id="loading-message">Analizando tus respuestas en 5 dimensiones</p>
             </div>
         </section>
 
     </div>
 
-    <!-- Footer -->
     <footer class="site-footer">
         <p>&copy; 2026 Consultora Estratégica Empresarial | <a href="mailto:contactofba@gmail.com">Contacto</a></p>
     </footer>
 
-    <!-- JavaScript -->
     <script src="js/assessment.js"></script>
 </body>
 </html>
